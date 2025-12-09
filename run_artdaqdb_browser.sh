@@ -25,7 +25,7 @@ done
 DATA_DIR="${PYTHON_ARGS[0]:-$SCRIPT_DIR/sampledata/teststand_db}"
 
 echo "======================================"
-echo "OTS Configuration Browser"
+echo "OTSDAQ Configuration Browser"
 echo "======================================"
 echo ""
 
@@ -76,7 +76,7 @@ echo "Activating virtual environment..."
 source "$VENV_DIR/bin/activate"
 
 if python -c "import artdaqdb_browser" 2>/dev/null; then
-    echo "✓ ots-browser already installed"
+    echo "✓ otsdaq-artdaqdb-browser already installed"
 else
     echo ""
     echo "Upgrading pip..."
@@ -86,7 +86,7 @@ else
     echo "Installing dependencies..."
     if [ -f "$SCRIPT_DIR/pyproject.toml" ]; then
         pip install --quiet -e "$SCRIPT_DIR[dev]"
-        echo "✓ Installed ots-browser with dev dependencies"
+        echo "✓ Installed otsdaq-artdaqdb-browser with dev dependencies"
     else
         echo "✗ Error: pyproject.toml not found"
         exit 1
@@ -101,9 +101,12 @@ if [ ! -d "$DATA_DIR" ]; then
 fi
 
 echo ""
-echo "Starting OTS Configuration Browser..."
+echo "Starting OTSDAQ Configuration Browser..."
 echo "Data directory: $DATA_DIR"
 echo ""
+
+export PATH="$SCRIPT_DIR/.mongodb/mongodb-database-tools/bin:$SCRIPT_DIR/.mongodb/mongosh/bin:$PATH"
+export TERM=xterm-256color
 
 python -m artdaqdb_browser "${PYTHON_ARGS[@]}"
 

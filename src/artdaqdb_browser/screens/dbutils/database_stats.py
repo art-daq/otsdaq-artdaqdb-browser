@@ -205,7 +205,7 @@ class DatabaseStatsScreen(OutputWindowMixin, DatabaseSelectorMixin, BaseScreen):
                 output.push("Press 'r' to refresh");
                 output.push("");
 
-                print(output.join("\n"));
+                print(output.join("\\n"));
             })();
             """
             cmd = build_mongo_shell_cmd(self.config, database=self.database, quiet=True)

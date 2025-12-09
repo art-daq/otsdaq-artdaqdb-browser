@@ -1,2 +1,2 @@
 [console_scripts]
-ots-browser = artdaqdb_browser.__main__:main
+artdaqdb-browser = artdaqdb_browser.__main__:main

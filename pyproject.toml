@@ -3,9 +3,9 @@ requires = ["setuptools>=65.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ots-browser"
+name = "artdaqdb-browser"
 version = "1.0.0"
-description = "OTS Configuration Browser - A Python TUI for browsing OTS configuration data"
+description = "OTSDAQ Configuration Browser - A Python TUI for browsing OTSDAQ configuration data"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
@@ -42,55 +42,8 @@ dev = [
 ]
 
 [project.scripts]
-ots-browser = "artdaqdb_browser.__main__:main"
-coverage-analyzer = "coverage_analyzer.cli:main"
+artdaqdb-browser = "artdaqdb_browser.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-python_classes = ["Test*"]
-python_functions = ["test_*"]
-addopts = "-v"
-asyncio_mode = "auto"
-filterwarnings = [
-    "ignore:coroutine 'AsyncMockMixin._execute_mock_call' was never awaited:RuntimeWarning",
-    "ignore:coroutine 'DatabaseSelectorMixin._fetch_databases' was never awaited:RuntimeWarning",
-    "ignore:coroutine 'RestoreScreen._run_restore' was never awaited:RuntimeWarning",
-    "ignore::pytest.PytestUnraisableExceptionWarning",
-]
-
-[tool.coverage.run]
-source = ["src/artdaqdb_browser"]
-omit = ["*/tests/*", "*/test_*.py"]
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "def __repr__",
-    "raise AssertionError",
-    "raise NotImplementedError",
-    "if __name__ == .__main__.:",
-    "if TYPE_CHECKING:",
-    "class .*\\bProtocol\\):",
-    "@(abc\\.)?abstractmethod",
-]
-
-[tool.coverage_analyzer]
-source = ["src/artdaqdb_browser"]
-tests = ["tests"]
-exclude = ["**/migrations/*", "**/__pycache__/*", "**/test_*.py"]
-threshold = 80
-output_dir = "coverage_reports"
-
-[tool.coverage_analyzer.priorities]
-public_api_weight = 2.0
-complexity_weight = 1.5
-textual_handlers_weight = 2.5
-untested_bonus = 50
-
-[tool.coverage_analyzer.textual]
-handler_patterns = ["on_*", "action_*", "watch_*"]
-lifecycle_methods = ["compose", "on_mount", "on_ready", "on_show"]

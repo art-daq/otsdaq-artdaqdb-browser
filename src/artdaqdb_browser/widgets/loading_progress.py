@@ -91,26 +91,6 @@ class LoadingProgress(Widget):
     LoadingProgress ProgressBar PercentageStatus {
         display: none;
     }
-
-    LoadingProgress
-        width: 100%;
-        height: 1fr;
-        background: transparent;
-        border: none;
-        padding: 0;
-    }
-
-    LoadingProgress.progress-only
-        display: none;
-    }
-
-    LoadingProgress
-        border: none;
-    }
-
-    LoadingProgress
-        background: transparent;
-    }
     """
     elapsed_seconds: reactive[int] = reactive(0)
     current_news_index: reactive[int] = reactive(0)

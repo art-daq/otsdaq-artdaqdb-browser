@@ -1,6 +1,8 @@
 .DS_Store
 sampledata/
 venv/
+.mongodb
+appconfig.yml
 **/*.pyc
 *.log
 *.tgz
