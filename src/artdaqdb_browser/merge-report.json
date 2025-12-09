@@ -1,0 +1,412 @@
+{
+  "run_info": {
+    "timestamp": "2025-12-08T23:45:36.877712",
+    "target_dir": "/home/artdaq/artdaqdb/dist/src/artdaqdb_browser",
+    "metadata_dir": "/home/artdaq/artdaqdb/metadata",
+    "mode": "in-place"
+  },
+  "statistics": {
+    "total_files": 79,
+    "processed": 79,
+    "skipped": 0,
+    "errors": 0
+  },
+  "files": [
+    {
+      "path": "data/analyzers/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/analyzers/base.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/analyzers/dummy.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/analyzers/duplicate_collections.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/analyzers/duplicate_versions.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/base.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/cached.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/factory.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/filesystem.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/fs_index.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/indexes.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "data/mongodb.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "models/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "models/document.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "models/document_manager.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "models/trace_entry.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "cache/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "cache/manager.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "mixins/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "mixins/database_selector.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "mixins/loadable_data.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "mixins/output_window.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "mixins/state_based_data.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/filter_input.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/footer_bar.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/json_viewer.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/key_panel.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/loading_progress.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "widgets/trace_filter_row.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/backup_screen.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/cache_viewer.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/database_stats.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/db_utilities_menu.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/directory_browser.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/recreate_indexes.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/restore_screen.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbutils/server_stats.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/assign_config_modal.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/collection_browser.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/collection_table.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/config_list.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/db_browser_menu.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbbrowser/version_list.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbdoctor/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbdoctor/db_doctor_menu.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbdoctor/json_diff_merge.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbdoctor/repair_collection.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/dbdoctor/repair_configuration.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/viewers/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/viewers/config_editor.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/viewers/document_view.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/viewers/hn_detail.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/viewers/trace_viewer.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/base.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/db_browser.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/db_doctor.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/db_utils.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/help_screen.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "screens/home.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "__main__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "app.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "config/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "config/defaults.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "config/helpers.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "config/loader.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "config/schema.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "constants.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "exceptions.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "lockfile.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "state/__init__.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "state/app_state.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "trace.py",
+      "status": "processed",
+      "header_lines": 9
+    },
+    {
+      "path": "utils.py",
+      "status": "processed",
+      "header_lines": 9
+    }
+  ],
+  "errors": []
+}
