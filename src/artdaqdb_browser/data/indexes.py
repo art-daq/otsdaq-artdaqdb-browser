@@ -5,7 +5,7 @@ Category: Data
 Author: ArtdaqDB Browser Team
 Depends: None
 Exports: IndexSpec, get_recommended_indexes, get_index_keys_for_pymongo, recreate_indexes_on_collection, recreate_indexes_on_database, ...
-Complexity: Medium | Lines: 349
+Complexity: Medium | Lines: 397
 """
 
 from typing import List, Dict, Any, Tuple, Optional
@@ -24,47 +24,68 @@ ASCENDING = 1
 DESCENDING = -1
 RECOMMENDED_INDEXES: List[IndexSpec] = [
     IndexSpec(
-        name="configurations_name_idx",
+        name="idx_version_entities_name",
+        keys=[("version", ASCENDING), ("entities.name", ASCENDING)],
+        description="CRITICAL: Duplicate detection, findCompositionsContaining",
+    ),
+    IndexSpec(
+        name="idx_configurations_name",
         keys=[("configurations.name", ASCENDING)],
-        description="Index for configuration lookups (get_documents_by_configuration_summary)",
+        description="Configuration lookups (shared with GUI)",
     ),
     IndexSpec(
-        name="version_idx",
+        name="idx_entities_name",
+        keys=[("entities.name", ASCENDING)],
+        description="Entity lookups (findVersions, findEntities)",
+    ),
+    IndexSpec(name="idx_version_asc", keys=[("version", ASCENDING)], description="Ascending version for API queries"),
+    IndexSpec(
+        name="idx_version_desc",
         keys=[("version", DESCENDING)],
-        description="Index for version sorting (get_document_versions_summary)",
+        description="Descending version for GUI sorting (most recent first)",
     ),
     IndexSpec(
-        name="bookkeeping_created_idx",
+        name="idx_bookkeeping_created",
         keys=[("bookkeeping.created", DESCENDING)],
-        description="Index for finding latest documents by creation date",
+        description="Timestamp sorting for finding latest documents",
     ),
     IndexSpec(
-        name="config_version_compound_idx",
+        name="idx_bookkeeping_status",
+        keys=[("bookkeeping.isdeleted", ASCENDING), ("bookkeeping.isreadonly", ASCENDING)],
+        description="Document protection status filtering",
+    ),
+    IndexSpec(
+        name="idx_config_version_compound",
         keys=[("configurations.name", ASCENDING), ("version", DESCENDING)],
-        description="Compound index for configuration + version queries",
+        description="Configuration + version queries with descending sort",
     ),
     IndexSpec(
-        name="config_summary_covering_idx",
+        name="idx_collection_version",
+        keys=[("collection", ASCENDING), ("version", DESCENDING)],
+        description="Duplicate version detection queries",
+    ),
+    IndexSpec(
+        name="idx_config_summary_covering",
         keys=[
             ("configurations.name", ASCENDING),
             ("collection", ASCENDING),
             ("version", DESCENDING),
             ("bookkeeping.created", DESCENDING),
         ],
-        description="Covering index for get_documents_by_configuration_summary - avoids full document fetch",
+        description="Covering index for get_documents_by_configuration_summary",
     ),
     IndexSpec(
-        name="config_assignment_covering_idx",
+        name="idx_config_assignment_covering",
         keys=[
             ("configurations.name", ASCENDING),
             ("configurations.assigned", DESCENDING),
             ("collection", ASCENDING),
             ("version", DESCENDING),
         ],
-        description="Covering index for configuration assignment queries with timestamps",
+        description="Covering index for configuration assignment queries",
     ),
     IndexSpec(
-        name="full_summary_covering_idx",
+        name="idx_full_summary_covering",
         keys=[
             ("configurations.name", ASCENDING),
             ("collection", ASCENDING),
@@ -73,17 +94,7 @@ RECOMMENDED_INDEXES: List[IndexSpec] = [
             ("bookkeeping.isdeleted", ASCENDING),
             ("bookkeeping.isreadonly", ASCENDING),
         ],
-        description="Full covering index for document summaries including protection status",
-    ),
-    IndexSpec(
-        name="collection_version_idx",
-        keys=[("collection", ASCENDING), ("version", DESCENDING)],
-        description="Index for duplicate version detection queries",
-    ),
-    IndexSpec(
-        name="bookkeeping_status_idx",
-        keys=[("bookkeeping.isdeleted", ASCENDING), ("bookkeeping.isreadonly", ASCENDING)],
-        description="Index for filtering by document protection status",
+        description="Full covering index for summaries with protection status",
     ),
 ]
 
@@ -102,30 +113,36 @@ def recreate_indexes_on_collection(
     if indexes is None:
         indexes = RECOMMENDED_INDEXES
     result = {"collection": collection.name, "created": [], "dropped": [], "skipped": [], "errors": []}
-    existing_indexes = set()
-    try:
-        for idx in collection.list_indexes():
-            existing_indexes.add(idx["name"])
-    except Exception as e:
-        result["errors"].append(f"Failed to list indexes: {e}")
-        return result
-    for index_spec in indexes:
+    if drop_existing:
         try:
-            if drop_existing and index_spec.name in existing_indexes:
+            existing_indexes = list(collection.list_indexes())
+            for idx in existing_indexes:
+                idx_name = idx["name"]
+                if idx_name == "_id_":
+                    continue
                 try:
-                    collection.drop_index(index_spec.name)
-                    result["dropped"].append(index_spec.name)
-                    trace.debug(
-                        f"Dropped existing index: {index_spec.name}",
-                        tags=["database", "mutation"],
+                    collection.drop_index(idx_name)
+                    result["dropped"].append(idx_name)
+                    trace.debug(f"Dropped index: {idx_name}", tags=["database", "mutation"], collection=collection.name)
+                except Exception as e:
+                    result["errors"].append(f"Failed to drop {idx_name}: {e}")
+                    trace.error(
+                        f"Failed to drop index: {idx_name}",
+                        tags=["database", "mutation", "error"],
+                        exception=e,
                         collection=collection.name,
                     )
-                except Exception as e:
-                    result["errors"].append(f"Failed to drop {index_spec.name}: {e}")
-                    continue
-            elif not drop_existing and index_spec.name in existing_indexes:
-                result["skipped"].append(index_spec.name)
-                continue
+        except Exception as e:
+            result["errors"].append(f"Failed to list indexes: {e}")
+            trace.error(
+                "Failed to list indexes for dropping",
+                tags=["database", "error"],
+                exception=e,
+                collection=collection.name,
+            )
+            return result
+    for index_spec in indexes:
+        try:
             collection.create_index(index_spec.keys, name=index_spec.name, background=True)
             result["created"].append(index_spec.name)
             trace.debug(f"Created index: {index_spec.name}", tags=["database", "mutation"], collection=collection.name)
